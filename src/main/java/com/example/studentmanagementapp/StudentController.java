@@ -33,5 +33,40 @@ public class StudentController
         return studentService.updateAge(regNo, newAge);
     }
 
+    @PutMapping("/update-course")
+    public Student updateCourse(@RequestParam("id") int regNo, @RequestParam("course") String newCourse)
+    {
+        return  studentService.updateCourse(regNo, newCourse);
+    }
+
+    @PutMapping("update-courseBypath/{id}/{cour}")
+    public Student updateCourseBypath(@PathVariable("id") int regNo, @PathVariable("cour") String newCourse)
+    {
+        return studentService.updateCourseBypath(regNo, newCourse);
+    }
+
+    @PutMapping("/change-course/{course}")
+    public Student changeCourse(@RequestParam("id") int regNo, @PathVariable("course") String newCourse)
+    {
+        return studentService.changeCourse(regNo, newCourse);
+    }
+
+    @PutMapping("/change-course-age")
+    public Student changeCourseAge(@RequestParam("id") int regNo, @RequestBody Student student)
+    {
+        return studentService.changeCourseAge(regNo, student);
+    }
+
+    @DeleteMapping("/deletebyParam")
+    public String deleteStudentbyparam(@RequestParam("id") int regNo)
+    {
+        return studentService.deleteStudentbyparam(regNo);
+    }
+
+    @DeleteMapping("/deletebypath/{id}")
+    public String deletebypath(@PathVariable("id") int regNo)
+    {
+        return  studentService.deletebypath(regNo);
+    }
 
 }
