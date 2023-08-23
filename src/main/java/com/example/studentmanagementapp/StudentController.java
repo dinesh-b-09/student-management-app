@@ -1,6 +1,9 @@
 package com.example.studentmanagementapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,9 +25,14 @@ public class StudentController
         return studentService.addStudent(student);
     }
     @GetMapping("/getpath/{id}")
-    public Student getStudentUsingPath(@PathVariable("id") int regNo)
+    public ResponseEntity getStudentUsingPath(@PathVariable("id") int regNo)
     {
-        return studentService.getStudentUsingPath(regNo);
+        Student student = studentService.getStudentUsingPath(regNo);
+        if(student == null)
+        {
+            return new ResponseEntity("doesnt exist", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(student, HttpStatus.FOUND);
     }
 
     @PutMapping("/update-age")
